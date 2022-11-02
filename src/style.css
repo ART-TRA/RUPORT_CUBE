@@ -1,0 +1,39 @@
+html,
+body,
+#root {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.canvas {
+    width: 100% !important;
+}
+
+.scene {
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    height: 400vh;
+}
+
+.noscroll::-webkit-scrollbar {
+    display: none !important;
+    width: 0;
+    height: 0;
+}
