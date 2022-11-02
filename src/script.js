@@ -23,7 +23,6 @@ let isNear = false;
 let scrollX = {value: 0};
 let scroll = 0;
 const rotationDelay = 120;
-const duration = 1;
 let elapsedTimeSide = 0;
 let frontRef;
 const raycaster = new THREE.Raycaster();
@@ -236,7 +235,6 @@ group.add(planeTop)
 group.add(planeBack)
 scene.add(group)
 
-//todo not working!!!
 const { body } = document;
 const blockScroll = () => {
 	if (isNear) {
@@ -315,22 +313,9 @@ const resizeTextureInner = (plane) => {
 									0.05
 								)
 							}
-						},
-						// onComplete: () => {
-						// 	if (!isNear) {
-						// 		// console.log('complete2')
-						// 		acceptToScroll = true;
-						// 		isLockMove = false;
-						// 	}
-						// }
+						}
 					}, 'resize')
-			},
-			onComplete: () => {
-				// console.log('complete')
-				if (!isNear) {
-
-				}
-			},
+			}
 		}, 'resize');
 }
 
@@ -403,22 +388,18 @@ const getCurrentEdge = () => {
 		if (window.scrollY <= scrollCheckPoints.bottom.scroll / 2) {
 			planeFront.material.color = new THREE.Color('rgb(255,255,255)')
 			currentEdge = 'front';
-			console.log('front');
 		} else if (window.scrollY > (scrollCheckPoints.bottom.scroll / 2) &&
 			window.scrollY <= (scrollCheckPoints.back.scroll / 2 + scrollCheckPoints.bottom.scroll / 2)
 		) {
 			planeBottom.material.color = new THREE.Color('rgb(255,255,255)')
 			currentEdge = 'bottom';
-			console.log('bottom');
 		} else if (window.scrollY > (scrollCheckPoints.back.scroll / 2 + scrollCheckPoints.bottom.scroll / 2) &&
 			window.scrollY <= (scrollHeight - window.innerHeight - scrollCheckPoints.bottom.scroll / 2)) {
 			planeBack.material.color = new THREE.Color('rgb(255,255,255)')
 			currentEdge = 'back';
-			console.log('back');
 		} else {
 			planeTop.material.color = new THREE.Color('rgb(255,255,255)')
 			currentEdge = 'top';
-			console.log('top');
 		}
 	}
 };
@@ -426,7 +407,7 @@ const getCurrentEdge = () => {
 getCurrentEdge();
 
 const tick = () => {
-	const elapsedTime = clock.getElapsedTime()
+	const elapsedTime = clock.getElapsedTime();
 	blockScroll();
 
 	if (!isLockMove || !isNear) {
@@ -468,8 +449,8 @@ const tick = () => {
 	//Update controls
 	controls.update() //если включён Damping для камеры необходимо её обновлять в каждом кадре
 
-	renderer.render(scene, camera)
-	window.requestAnimationFrame(tick)
+	renderer.render(scene, camera);
+	window.requestAnimationFrame(tick);
 }
 
-tick()
+tick();
